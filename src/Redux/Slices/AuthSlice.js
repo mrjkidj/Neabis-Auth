@@ -13,14 +13,14 @@ export const fetchRegister = createAsyncThunk('register/fetchRegister', async (p
 
 export const fetchAuthMe = createAsyncThunk('auth/fetchAuthMe', async () => {
     const { data } = await axios.get('/api/me');
-    console.log(data.token);
-    return data;
+    return data; // Просто возвращаем весь объект без попыток обращения к свойству "token"
 });
 
 export const fetchAuthUserStatus = createAsyncThunk('auth/fetchAuthUserStatus', async () => {
     const { data } = await axios.get('/api/me');
     return data;
 });
+
 
 export const sendConfirmationEmail = createAsyncThunk(
   'auth/sendConfirmationEmail',

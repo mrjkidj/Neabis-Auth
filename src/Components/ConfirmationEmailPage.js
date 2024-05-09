@@ -10,20 +10,24 @@ import 'tailwindcss/tailwind.css';
 const ConfirmationEmailPage = ({ email }) => {
     const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
-    const navigate = useNavigate(); // Используем хук useNavigate
-    const enable = useSelector(state => state.auth.enable); // Получаем значение enable из стейта
+    const navigate = useNavigate(); 
+    const enabled = useSelector(state => state.auth.enabled); 
 
     useEffect(() => {
-        // Проверяем, если значение enable стало true, то перенаправляем пользователя на /home
-        if (enable) {
+      
+        if (enabled) {
             navigate("/home");
         }
-    }, [enable, navigate]); // useEffect будет запускаться при изменении значения enable или navigate
+    }, [enabled, navigate]); 
 
     const openModal = () => setIsOpen(true);
     const closeModal = () => setIsOpen(false);
 
     const handleResendConfirmationEmail = async () => {
+        if (!email) {
+            console.error("Email не определен");
+            return;
+        }
         try {
             await dispatch(resendConfirmationEmail());
             console.log("Подтверждающее сообщение отправлено повторно");
@@ -32,6 +36,7 @@ const ConfirmationEmailPage = ({ email }) => {
             alert("Произошла ошибка при отправке повторного подтверждающего сообщения!");
         }
     };
+
 
     return (
         <div>

@@ -29,16 +29,12 @@ const Auth = () => {
         const response = await dispatch(fetchAuth(values));
         console.log('Ответ от сервера:', response);
       
-        if (response.accessToken) {
-          console.log('Токен:', response.accessToken);
-          const meResponse = await fetch('/api/me');
-          const userData = await meResponse.json();
-      
-          if (userData.userStatus === 'First time') {
-            window.location.href = "/home";
-          } else {
-            window.location.href = "/home";
-          }
+        if (response.payload.accessToken) {
+          console.log('Токен:', response.payload.accessToken);
+          
+          // Ваш сервер должен принять этот токен для авторизации
+          
+          window.location.href = "/home";
         } else {
           setErrorMessage('Неверный логин или пароль');
           toast.error('Неверный логин или пароль');
@@ -46,8 +42,9 @@ const Auth = () => {
       } catch (error) {
         console.error('Ошибка аутентификации:', error);
         setErrorMessage('Ошибка аутентификации. Пожалуйста, попробуйте еще раз.');
+        toast.error('Ошибка аутентификации. Пожалуйста, попробуйте еще раз.');
       }
-    }
+    }    
   });
 
   const togglePasswordVisibility = () => {

@@ -9,6 +9,8 @@ const Home = () => {
     const openModal = () => setIsOpen(true);
     const closeModal = () => setIsOpen(false);
     const dispatch = useDispatch();
+    const accessToken = localStorage.getItem('accessToken');
+
 
     const handleLogout = () => {
         openModal();
@@ -18,22 +20,22 @@ const Home = () => {
         try {
             // Получение токена из локального хранилища
             const accessToken = localStorage.getItem('accessToken');
-    
+
             if (!accessToken) {
                 console.error("Токен доступа не найден.");
                 return;
             }
-    
+
             const config = {
                 headers: {
                     Authorization: `Bearer ${accessToken}`
                 }
             };
-    
+
             await axios.get('/api/logout', config);
-    
-            dispatch(logout()); 
-            closeModal(); 
+
+            dispatch(logout());
+            closeModal();
             window.location.href = "/";
         } catch (error) {
             console.error('Ошибка при выходе из системы:', error);
@@ -43,7 +45,11 @@ const Home = () => {
     return (
         <div className="flex items-center justify-center h-screen">
             <div className="flex flex-col items-center">
-                <h1 className="text-center text-black font-bold text-4xl mb-4">Добро пожаловать!</h1>
+                {!accessToken ? (
+                    <h1 className="text-center text-black font-bold text-4xl mb-4">Добро пожаловать!</h1>
+                ) : (
+                    <h1 className="text-center text-black font-bold text-4xl mb-4">С возвращением!</h1>
+                )}
                 <p className="text-center mb-4">Lorby - твой личный репетитор</p>
                 <div className="w-[300px] h-[300px] mt-4 mb-4">
                     <img src={Lorby} alt="" className="w-128 h-auto mx-auto" />
