@@ -64,8 +64,8 @@ const Home = () => {
                         <h2 className="text-xl font-semibold mb-4 text-center font-mplus">Выйти</h2>
                         <p className="text-center">Точно выйти?</p>
                         <div className="flex flex-col justify-center items-center mt-4 w-full">
-                            <button onClick={closeModal} className="bg-gray-300 px-4 py-2 rounded-lg hover:bg-gray-400 font-mplus mb-2 w-full">Да, точно</button>
-                            <button onClick={confirmLogout} className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-900 font-mplus w-full">Нет, остаться</button>
+                            <button onClick={confirmLogout} className="bg-gray-300 px-4 py-2 rounded-lg hover:bg-gray-400 font-mplus mb-2 w-full">Да, точно</button>
+                            <button onClick={closeModal} className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-900 font-mplus w-full">Нет, остаться</button>
                         </div>
                     </div>
                 </div>
