@@ -3,14 +3,14 @@ import { NavLink } from "react-router-dom";
 import { Icon } from "react-icons-kit";
 import { basic_eye } from "react-icons-kit/linea/basic_eye";
 import { basic_eye_closed } from "react-icons-kit/linea/basic_eye_closed";
-import { angleLeft } from "react-icons-kit/fa/angleLeft";
 import Lorby from "../Assets/illustration.png";
 import { Form, useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { fetchRegister, sendConfirmationEmail } from "../Redux/Slices/AuthSlice";
 import { newSchema } from "../Schemas/Schemas";
-import axios from "axios";
 import 'tailwindcss/tailwind.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Regist = () => {
   const dispatch = useDispatch();
@@ -34,14 +34,14 @@ const Regist = () => {
             localStorage.setItem("accessToken", accessToken);
             window.location.href = "/confirmEmailPage";
           } else {
-            alert("Не удалось зарегистрироваться!");
+            toast.error("Не удалось зарегистрироваться!");
           }
         } else {
-          alert("Проверьте правильность введенных данных");
+          toast.error("Проверьте правильность введенных данных");
         }
       } catch (error) {
         console.error("Ошибка при регистрации:", error);
-        alert("Произошла ошибка при регистрации!");
+        toast.error("Произошла ошибка при регистрации!");
       } finally {
         setSubmitting(false);
       }
@@ -60,8 +60,8 @@ const Regist = () => {
           <div className="w-96 flex flex-col justify-center items-center">
             <img src={Lorby} alt="" className="w-[480px] h-[400px]" />
             <div className="text-center">
-              <h1 className="text-5xl font-semibold leading-12 mb-1">Lorby</h1>
-              <h2 className="text-2xl font-normal leading-6 mb-4">
+              <h1 className="text-5xl font-semibold leading-12 mb-1 font-mplus">Lorby</h1>
+              <h2 className="text-2xl font-normal leading-6 mb-4 font-mplus">
                 Твой личный репетитор
               </h2>
             </div>
@@ -72,7 +72,7 @@ const Regist = () => {
                 <path d="M2.5 12C2.5 7.52166 2.5 5.28249 3.89124 3.89124C5.28249 2.5 7.52166 2.5 12 2.5C16.4783 2.5 18.7175 2.5 20.1088 3.89124C21.5 5.28249 21.5 7.52166 21.5 12C21.5 16.4783 21.5 18.7175 20.1088 20.1088C18.7175 21.5 16.4783 21.5 12 21.5C7.52166 21.5 5.28249 21.5 3.89124 20.1088C2.5 18.7175 2.5 16.4783 2.5 12Z" stroke="currentColor" strokeWidth="1.5" />
                 <path d="M14 7C14 7 10 10.6824 10 12C9.99999 13.3176 14 17 14 17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              <button className="w-[96px] h-[52px]">
+              <button className="w-[96px] h-[52px] font-mplus">
                 Назад
               </button>
             </NavLink>
@@ -81,7 +81,7 @@ const Regist = () => {
           </div>
           <div className="w-[343px] h-[550px] flex flex-col justify-center gap-[30px]">
             <div className=" w-[300px] text-center" >
-              <h1 className="text-5xl font-semibold w-[100%] text-[30px] leading-[47px] ">
+              <h1 className="text-5xl font-semibold w-[100%] text-[30px] leading-[47px] font-mplus ">
                 Создать аккаунт Lorby
               </h1>
             </div>
@@ -176,7 +176,7 @@ const Regist = () => {
                 {errors.confirmPassword && touched.confirmPassword && (<p className="text-red-500">{errors.confirmPassword}</p>)}
               </div>
               <div className="flex justify-start  mt-8">
-                <button className="text-white bg-[#292929] w-[300px] h-[40px] rounded-xl" type="submit">Далее</button>
+                <button className="text-white bg-[#292929] w-[300px] h-[40px] rounded-xl" font-mplus type="submit">Далее</button>
               </div>
             </form>
           </div>
